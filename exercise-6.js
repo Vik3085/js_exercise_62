@@ -19,7 +19,7 @@ const persons = [
   }
 ];
 
-function fetchPersonById(id) {
+async function fetchPersonById(id) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const person = persons.find(item => item.id === id);
@@ -33,14 +33,15 @@ function fetchPersonById(id) {
   });
 }
 
-fetchPersonById(2)
-  .then((personJson) => JSON.parse(personJson))
-  .then((person) => console.log(person))
-  .catch((err) => console.error(err));
+async function result() {
+  const personById = await fetchPersonById(2);
+  console.log(JSON.parse(personById))
+}
 
-  async function result() {
-    let personPromise = await fetchPersonById(2)
-    .then((personPromise) => JSON.parse(personPromise));
-    console.log(personPromise);
-  }
-  result();
+result();
+
+
+// fetchPersonById(2)
+//   .then((personJson) => JSON.parse(personJson))
+//   .then((person) => console.log(person))
+//   .catch((err) => console.error(err));
